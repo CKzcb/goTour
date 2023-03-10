@@ -1,0 +1,50 @@
+/**
+ * @Author: 蛋白质先生
+ * @Description:
+ * @File: main
+ * @Version: 1.0.0
+ * @Date: 2023/3/10 11:19
+ */
+
+package main
+
+import (
+	"flag"
+	"fmt"
+)
+
+/**
+* main
+*  @Description:
+* 	flag.Parse()
+*		1. 所有命令行参数注册的最后调用
+*		2. 解析并绑定命令行参数
+ */
+func main() {
+	var name string
+
+	//flag.StringVar(&name, "name", "", " please input name")
+	// 1. to parse, get args
+	flag.Parse()
+	// 2. create  subcommand cmd
+	goCmd := flag.NewFlagSet("go", flag.ExitOnError)
+	goCmd.StringVar(&name, "name", "", "")
+
+	pyCmd := flag.NewFlagSet("py", flag.ExitOnError)
+	pyCmd.StringVar(&name, "n", "", "")
+
+	// 3. need to parse
+	args := flag.Args()
+	fmt.Println("args : ", args)
+	if len(args) <= 0 {
+		return
+	}
+	// 4. select son cmd
+	switch args[0] {
+	case "go":
+		_ = goCmd.Parse(args[1:])
+	case "py":
+		_ = pyCmd.Parse(args[1:])
+	}
+	fmt.Println("input name is : ", name)
+}
