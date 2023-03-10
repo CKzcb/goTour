@@ -9,21 +9,13 @@
 package main
 
 import (
-	"flag"
-	"fmt"
+	"github.com/CKzcb/goTour/cmd"
+	"log"
 )
 
 func main() {
-	var name string
-
-	//flag.StringVar(&name, "name", "", " please input name")
-	flag.Parse()
-
-	goCmd := flag.NewFlagSet("go", flag.ExitOnError)
-	goCmd.StringVar(&name, "name", "", "")
-
-	pyCmd := flag.NewFlagSet("py", flag.ExitOnError)
-	pyCmd.StringVar(&name, "n", "", "")
-
-	fmt.Println("input name is : ", name)
+	err := cmd.Execute()
+	if err != nil {
+		log.Fatal("cmd.Execute err: %v", err)
+	}
 }
