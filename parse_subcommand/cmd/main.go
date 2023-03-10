@@ -11,16 +11,18 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/CKzcb/goTour/parse_subcommand"
 )
 
 /**
-* main
+* t1
 *  @Description:
 * 	flag.Parse()
 *		1. 所有命令行参数注册的最后调用
 *		2. 解析并绑定命令行参数
  */
-func main() {
+func t1() {
+
 	var name string
 
 	//flag.StringVar(&name, "name", "", " please input name")
@@ -47,4 +49,16 @@ func main() {
 		_ = pyCmd.Parse(args[1:])
 	}
 	fmt.Println("input name is : ", name)
+}
+
+func t2() {
+	var name parse_subcommand.Name
+	flag.Var(&name, "name", "name")
+	flag.Parse()
+	fmt.Println("in t2 ... ", name)
+}
+
+func main() {
+	//t1()
+	t2()
 }

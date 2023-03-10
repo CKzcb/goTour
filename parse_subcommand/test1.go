@@ -7,3 +7,22 @@
  */
 
 package parse_subcommand
+
+import (
+	"errors"
+	"fmt"
+)
+
+type Name string
+
+func (n *Name) Set(value string) error {
+	if len(*n) > 0 {
+		return errors.New("name flag already set ... ")
+	}
+	*n = Name("object: " + value)
+	return nil
+}
+
+func (n *Name) String() string {
+	return fmt.Sprint(*n)
+}
