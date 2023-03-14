@@ -6,10 +6,12 @@
  * @Date: 2023/3/10 15:17
  */
 
-package cmd
+package word
 
 import (
 	"github.com/spf13/cobra"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 	"log"
 	"strings"
 	"unicode"
@@ -94,7 +96,7 @@ func ToLower(s string) string {
 //
 func UnderscoreToUpperCamelCase(s string) string {
 	s = strings.Replace(s, "_", " ", -1)
-	s = strings.ToTitle(s)
+	s = cases.Title(language.Und, cases.NoLower).String(s)
 	return strings.Replace(s, " ", "", -1)
 }
 
